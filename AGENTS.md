@@ -3,11 +3,11 @@
 ## 基本方針
 - 会話は常に丁寧な日本語で行う。
 - 記録が必要と判断した場合のみ、本ファイルへ簡潔に追記する。
-- タスク管理・進捗ログは別途専用ファイルまたはツールで管理する。
-- 新たなタスクに着手する際は`TASKS.md`へ着手日時を記録し、完了時に完了日時と関連コミットIDを追記する。
+- タスクや進捗ログは `saleslist-docs/task_tracker.md` で管理する。着手時にタスクを起票し、完了時に完了日時と関連コミットIDを記録する。
 - コードをコミット／プッシュする前に、可能な限り以下を実行してエラーがないことを確認する。
   - `npm run lint` / `flake8` などの lint ツール
   - `npm run test` / `pytest` などの自動テスト
+  - `npm exec tsc`
   - 必要に応じて `npm run build` 等のビルド確認
 
 ## コマンド実行ポリシー
@@ -45,5 +45,15 @@
 - すべてのGit操作
 - WSL関連操作
 
+### 環境固有メモ
+- フロントエンド開発サーバーは `docker compose ... up -d frontend` で起動し、常にホスト側 `http://localhost:3010` に割り当てる。`docker compose run` で別ポート（3000など）を開けないこと。
+- フロントの環境変数を変更したりコードを更新したら、`docker compose -f saleslist-infra/docker-compose/dev/docker-compose.yml build frontend` → `... up -d frontend` を実行してイメージを再ビルドする。ビルドが難しい場合は代わりに `docker compose -f saleslist-infra/docker-compose/dev/docker-compose.yml run --rm --service-ports frontend npm run dev -- --hostname 0.0.0.0 --port 3010` を使う。
+- バックエンドは `http://localhost:8010`、PostgreSQL は `localhost:5442`、Redis は `localhost:6380` を固定ポートとする。テスト実行時もこのポート設定を前提にしているため、compose 起動前に別用途で占有していないか確認すること。
+
 ---
-本ファイルはCodexエージェントの運用ルールのみを記載する。その他の仕様整理やタスクログは別ファイルに整備すること。
+本ファイルはCodexエージェントの運用ルールのみを記載する。その他の仕様は以下を参照すること。
+- `saleslist-docs/task_tracker.md`: タスク起票・設計書のリンク・完了コミットIDの記録。
+- `saleslist-infra/README.md`: 
+  - 「ローカル開発環境の起動」にセットアップ・起動・停止手順。
+  - 「デプロイメント」「ヘルスチェック」に本番／ステージングのデプロイおよび稼働確認手順。必要に応じて `saleslist-infra/scripts/` 配下のスクリプトも参照。
+- `saleslist-docs/design`: 設計書格納ディレクトリ 
