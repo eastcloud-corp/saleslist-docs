@@ -16,6 +16,7 @@
 | T-010 | 法人番号API利用モック画面 | API申請用スクリーンショット取得のため、法人番号/法人名検索のデモ画面を実装する | 2025-10-29 16:45 JST | 2025-10-29 16:55 JST | 未コミット | 未コミット | saleslist-front/app/corporate-number/mock/page.tsx | フロント単体のデモページ。バックエンド接続なし。 |
 | T-011 | 法人番号・オープンデータCeleryタスク整備 | 既存バッチをCeleryタスク化し、フロントの実行ボタンと連動させる。1ヶ月クールダウン設定を適用 | 2025-10-30 02:40 JST | 2025-10-30 03:24 JST | 未コミット | 未コミット | saleslist-docs/ | docker/dev に redis/worker を追加、API は Celery 経由で実行するよう更新。 |
 | T-012 | オープンデータソース拡充 | 埼玉/神奈川/千葉/愛知/兵庫/京都/福岡/広島の自治体データを `config/opendata_sources.yaml` に追加し、マッピングとテストを整備する | - | - | - | - | saleslist-docs/design | まずは各自治体データの公開形式調査と CSV/項目マッピングの確認が必要。 |
+| INV-001 | 管理画面静的ファイル調査 | 本番 Django 管理画面で CSS/JS が 404 となる要因を切り分け、静的配信経路と設定の不整合を洗い出す | - | - | - | - | saleslist-docs/ | 調査タスク。リバースプロキシの `/static/` ルーティングと backend 側の collectstatic 結果を確認する。 |
 | T-013 | Facebookページ活動状況の推定設計 | Graph API が利用できない Facebook ページについて、スクレイピング可能なメタ情報から活動状況をスコアリングするルールを定義する | 2025-10-31 11:20 JST | - | - | - | saleslist-docs/design/facebook-page-activity-assessment.md | メタタグ・OGタグ・HTTPレスポンスなど複数指標を組み合わせた「アクティブ/非アクティブ/判定不能」の三区分を策定する |
 | T-013 | Celery バッチ本番スケジュール | 法人番号・オープンデータ取り込みを本番のみ定期実行し、開発環境は手動トリガー運用とする | - | - | - | - | saleslist-docs/ops | Celery Beat もしくは cron 設定を環境ごとに切り替える設計を検討。 |
 | T-014 | AI補完候補値の正規化 | PowerPlexy などの結果をレビュー候補登録前に整形し、数値項目で承認エラーが起きないよう正規化を導入する | 2025-11-03 05:12 JST | 2025-11-03 16:45 JST | feat: derive PowerPlexy usage limits and prioritize never-enriched companies | backend:6a3e4f3 | saleslist-docs/design | established_year・capital などの正規化ルールを定義し、AI補完パイプラインへ組み込む |
