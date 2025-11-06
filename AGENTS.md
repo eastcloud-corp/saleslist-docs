@@ -58,3 +58,4 @@
   - 「デプロイメント」「ヘルスチェック」に本番／ステージングのデプロイおよび稼働確認手順。必要に応じて `saleslist-infra/scripts/` 配下のスクリプトも参照。
 - `saleslist-docs/design`: 設計書格納ディレクトリ 
 - `saleslist-docs/bugfix`: バグ修正方針格納ディレクトリ
+- `saleslist-docs/operations/release-tag-guide.md`: タグ発行による本番デプロイ手順
