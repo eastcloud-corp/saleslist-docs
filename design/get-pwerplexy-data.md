@@ -78,7 +78,7 @@ ai_source	CharField	“rule” / “ai” / “manual”
 URL	https://api.perplexity.ai/query
 Method	POST
 Header	Authorization: Bearer ${API_KEY}
-Model	sonar-medium
+Model	sonar-pro
 Content-Type	application/json
 Rate Limit	60 req/min（Celery内で制御）
 7. プロンプト仕様（JSON限定出力）
